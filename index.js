@@ -33,7 +33,8 @@ async function run() {
     generationConfig,
   });
 
-  const prompt = "intro: You are a chatbot please help the user with their question";
+  const prompt =
+    "intro: You are a chatbot please help the user with their question";
 
   const result = await model.generateContent(prompt);
   const response = await result.response;
