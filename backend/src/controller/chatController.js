@@ -27,10 +27,10 @@ const getInput = (prompt) => {
 const getChat = async () => {
   const generationConfig = {
     stopSequences: ["red"],
-    maxOutputTokens: 500,
-    temperature: 1,
-    topP: 0.1,
-    topK: 16,
+    maxOutputTokens: 700,
+    temperature: 1.2,
+    topP: 0.4,
+    topK: 25,
   };
 
   const safetySettings = [
@@ -40,6 +40,14 @@ const getChat = async () => {
     },
     {
       category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+      threshold: HarmBlockThreshold.BLOCK_NONE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+      threshold: HarmBlockThreshold.BLOCK_NONE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
       threshold: HarmBlockThreshold.BLOCK_NONE,
     },
   ];
@@ -54,7 +62,18 @@ const getChat = async () => {
     history: [
       {
         role: "user",
-        parts: [{ text: "Hello, can you talk to me?" }],
+        parts: [
+          {
+            text: "Hi, Can you design an interestring story and ask the player to make decisions? Tell the player the number for each decision and after they make the choice, push the story forward and give them more choices.",
+          },
+          {
+            text: "Do not make the story a POV story, make it a story where the player is making decisions like a game. E.g. make the player a commander of an army or a space ship captain. Be creative and wild with the story.",
+          },
+
+          {
+            text: "Try to push the story forward with each choice the player makes. Design the choices big, don't make them boring. Please start by telling the player the setting of the story. Remember don't make your reply too long.",
+          },
+        ],
       },
     ],
   });
@@ -96,3 +115,5 @@ const goChat = async () => {
 };
 
 goChat();
+
+// Try to summarize the story now as It will be saved in the database for the player to continue from where they left off.
